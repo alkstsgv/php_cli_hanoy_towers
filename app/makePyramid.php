@@ -360,7 +360,7 @@ function createExamplesOfPyramid(array $pyrWithDisks, array $pyrWithoutDisks): a
     foreach ($pyramidWithDisks as $key => $value) {
         $firstPyramidWithDisks = str_pad($value, $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH);
         $secondPyramidWithoutDisks = str_pad($pyramidTwo[$key], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH);
-        $thirdPyramidWithoutDisks = str_pad($pyramidThree[$key], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH) . PHP_EOL;
+        $thirdPyramidWithoutDisks = makePyramid . phpstr_pad($pyramidThree[$key], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH) . PHP_EOL;
 //        print_r($firstPyramidWithDisks . $secondPyramidWithoutDisks . $thirdPyramidWithoutDisks);
     }
 
@@ -430,11 +430,64 @@ function choosePyramids(array $inputArr, string $firstPyr, string $secondPyr): a
 /*
  * Функция меняет местами конкретные элементы в двух массивах через кучу
  */
-function changeElements(array $arr, int $numOfElem): array
+//function changeElements(array $arr, int $numOfElem): array
+//{
+//
+//    $middleArr = [];
+//    $outputArray = [];
+//
+//    foreach ($arr as [$item] ) {
+//        $middleArr[] = $item[$numOfElem];
+//    }
+////var_dump($middleArr);
+//    foreach ($arr as $key => [$value]) {
+//        $value[$numOfElem] = array_pop($middleArr);
+//        $outputArray[$key] = [$value];
+//    }
+////    var_dump($outputArray);
+//    return $outputArray;
+//
+//}
+
+/*
+ * Функция сверяет элементы двух массивов, если они не равны, тогда идёт выше, пока не найдет элементы, которые равны.
+ * Затем следующий элемент из массива A меняется с элементом массива B по ключу $numOfElem/
+ */
+function changeElements(array $arr): array
 {
+
+//    var_dump($arr);
+//    $numOfElem = (int)($numOfElem);
+//    $numOfElem = $numOfElem != 0 ? $numOfElem : 1; // нельзя взять самый первый элемент любой пирамиды
 
     $middleArr = [];
     $outputArray = [];
+    $numOfElem = 0;
+    $test = [];
+    $count = 0;
+//    print_r("numOfElem до = {$numOfElem}" . PHP_EOL);
+
+
+    foreach ($arr as $key => [$item] ) {
+        $count = count($item);
+//        $numOfElem = $count;
+
+        for ($i = 0; $i < $count; $i++){
+            $test[] = $item[$i];
+            if ($test[$i] !== $item[$i]) {
+
+                    $numOfElem = $i;
+//                    print_r("numOfElem во время выполнения = {$numOfElem}" . PHP_EOL);
+//                    print_r($test[$i]);
+
+                    break;
+
+            }
+        }
+//        print_r("numOfElem после = {$numOfElem}");
+
+
+    }
 
     foreach ($arr as [$item] ) {
         $middleArr[] = $item[$numOfElem];
@@ -450,78 +503,29 @@ function changeElements(array $arr, int $numOfElem): array
 }
 
 
-
-//print_r($changedElemOfArr);
-
-//$changedElemOfArr = changeElements($choosePyramids,1)
-
-//$changedElemOfArr = changeElements($changedElemOfArr,2);
-
-
-
-//$changedElemOfArr = changeElements($changedElemOfArr,1);
-
-
-
-
-
-
 function mergeArrays(array $initArr, array $modArr): array
 {
     $replacedArray = array_replace_recursive($initArr, $modArr);
 //    print_r(array_replace_recursive($initArr, $modArr));
+//    var_dump($replacedArray);
     return $replacedArray;
 }
 
-function setDiskOverhead(array $array, int $numOfElem): array
+function printPyramids(array $array): void
 {
-//    var_dump($array);
-//    [, $arr1, $arr2] = $arr;
-    $middleArr = [];
-    foreach ($array as $key => [$arr]) {
-        foreach ($arr as $key2 => $value) {
-//            var_dump($arr);
-            if ($key2 <= $numOfElem) {
-                $middleArr[$key][$key2] = $value;
+    [$arr1, $arr2, $arr3] = $array;
+    $paddingBetweenPyramids = 50;
 
-            } else {
-                break;
-            }
+    foreach ($arr1 as $key => $arr) {
+        foreach ($arr as $k => $v) {
+            $left = (str_pad($v, $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH));
+            $middle = (str_pad($arr2[$key][$k], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH));
+            $right = (makePyramid . phpstr_pad($arr3[$key][$k], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH) . PHP_EOL);
+            print_r($left . $middle . $right);
         }
-
-
-    }
-//    var_dump($middleArr);
-    foreach ($middleArr as $key => $arr) {
-//        print_r($arr[$key]);
-        foreach ($arr as $key2 => $value) {
-            print_r($key2);
-        }
-
-
     }
 
-    return [];
 }
-
-
-
-//function printPyramids(array $finalArray): void
-//{
-////    var_dump($finalArray);
-//    [$pyramidWithDisks, $pyramidTwo, $pyramidThree] = $finalArray;
-//    $paddingBetweenPyramids = 50;
-//
-//    foreach ($pyramidWithDisks as $key => $value) {
-////        print_r($value);
-////        $firstPyramidWithDisks = str_pad($value, $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH);
-////        $secondPyramidWithoutDisks = str_pad($pyramidTwo[$key], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH);
-////        $thirdPyramidWithoutDisks = str_pad($pyramidThree[$key], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH) . PHP_EOL;
-////        print_r($firstPyramidWithDisks . $secondPyramidWithoutDisks . $thirdPyramidWithoutDisks);
-//    }
-////    var_dump($initArr);
-//}
-
 
 $pyramidWithoutDisks = createOriginalPyramid(7);
 $pyramidWithDisks = createPyramidWithDisks(7);
@@ -529,16 +533,65 @@ $initArrOfArrs = createExamplesOfPyramid($pyramidWithDisks, $pyramidWithoutDisks
 $initArr = getInitArr($initArrOfArrs);
 
 $chosenPyramids = choosePyramids($initArr, "0", "1");
-$setDiskOverhead = setDiskOverhead($chosenPyramids, 3);
-$changedElemOfArr = changeElements($chosenPyramids,3);
+$changedElemOfArr = changeElements($chosenPyramids);
 $mergedArrays = mergeArrays($initArr, $changedElemOfArr);
+$printArrays = printPyramids($mergedArrays);
+
+
+$chosenPyramids = choosePyramids($mergedArrays, "0", "2");
+$changedElemOfArr = changeElements($chosenPyramids);
+$mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
+$printArrays = printPyramids($mergedArrays);
 
 
 $chosenPyramids = choosePyramids($mergedArrays, "1", "2");
-//$setDiskOverhead = setDiskOverhead($chosenPyramids, 3);
-$changedElemOfArr = changeElements($chosenPyramids,7);
+$changedElemOfArr = changeElements($chosenPyramids);
 $mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
-//print_r($mergedArrays);
-//$printPyramids = printPyramids($mergedArrays);
+$printArrays = printPyramids($mergedArrays);
+
+$chosenPyramids = choosePyramids($mergedArrays, "0", "1");
+$changedElemOfArr = changeElements($chosenPyramids);
+$mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
+$printArrays = printPyramids($mergedArrays);
+
+
+
+
+//$chosenPyramids = choosePyramids($mergedArrays, "1", "2");
+//$changedElemOfArr = changeElements($chosenPyramids);
+//$mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
+//
+//$chosenPyramids = choosePyramids($mergedArrays, "0", "1");
+//$changedElemOfArr = changeElements($chosenPyramids);
+//$mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
+//
+//
+//$chosenPyramids = choosePyramids($mergedArrays, "1", "2");
+//$changedElemOfArr = changeElements($chosenPyramids);
+//$mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
+//
+//$chosenPyramids = choosePyramids($mergedArrays, "0", "1");
+//$changedElemOfArr = changeElements($chosenPyramids);
+//$mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
+//
+//$chosenPyramids = choosePyramids($mergedArrays, "1", "2");
+//$changedElemOfArr = changeElements($chosenPyramids);
+//$mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
+//
+//$chosenPyramids = choosePyramids($mergedArrays, "0", "2");
+//$changedElemOfArr = changeElements($chosenPyramids);
+//$mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
+//
+//$chosenPyramids = choosePyramids($mergedArrays, "1", "2");
+//$changedElemOfArr = changeElements($chosenPyramids);
+//$mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
+//
+//
+//$chosenPyramids = choosePyramids($mergedArrays, "0", "2");
+//$changedElemOfArr = changeElements($chosenPyramids);
+//$mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
+
+
+
 
 

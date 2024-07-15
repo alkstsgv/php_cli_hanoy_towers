@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    '08d2c5f99921af90e8f45b1d2c3f5bfb' => $baseDir . '/app/makePyramid.php',
+    '8f440e0e2722dff94aaef34e179769aa' => $baseDir . '/app/src/makePyramid.php',
 );

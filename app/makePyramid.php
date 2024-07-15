@@ -360,7 +360,7 @@ function createExamplesOfPyramid(array $pyrWithDisks, array $pyrWithoutDisks): a
     foreach ($pyramidWithDisks as $key => $value) {
         $firstPyramidWithDisks = str_pad($value, $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH);
         $secondPyramidWithoutDisks = str_pad($pyramidTwo[$key], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH);
-        $thirdPyramidWithoutDisks = makePyramid . phpstr_pad($pyramidThree[$key], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH) . PHP_EOL;
+        $thirdPyramidWithoutDisks = str_pad($pyramidThree[$key], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH) . PHP_EOL;
 //        print_r($firstPyramidWithDisks . $secondPyramidWithoutDisks . $thirdPyramidWithoutDisks);
     }
 
@@ -520,7 +520,7 @@ function printPyramids(array $array): void
         foreach ($arr as $k => $v) {
             $left = (str_pad($v, $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH));
             $middle = (str_pad($arr2[$key][$k], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH));
-            $right = (makePyramid . phpstr_pad($arr3[$key][$k], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH) . PHP_EOL);
+            $right = (str_pad($arr3[$key][$k], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH) . PHP_EOL);
             print_r($left . $middle . $right);
         }
     }
@@ -594,4 +594,4 @@ $printArrays = printPyramids($mergedArrays);
 
 
 
-
+echo __FILE__;

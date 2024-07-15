@@ -7,7 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInitd751713988987e9331980363e24189ce
 {
     public static $files = array (
-        '08d2c5f99921af90e8f45b1d2c3f5bfb' => __DIR__ . '/../..' . '/app/makePyramid.php',
+        '8f440e0e2722dff94aaef34e179769aa' => __DIR__ . '/../..' . '/app/src/makePyramid.php',
     );
 
     public static $classMap = array (

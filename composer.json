@@ -1,6 +1,9 @@
 {
   "autoload": {
-    "files": ["app/makePyramid.php"
+    "files": [
+      "app/src/makePyramid.php",
+      "app/inputData.php",
+      "app/outputData.php"
     ]
   },
   "require": {

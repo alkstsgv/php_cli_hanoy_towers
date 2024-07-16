@@ -8,6 +8,8 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
 {
     public static $files = array (
         '8f440e0e2722dff94aaef34e179769aa' => __DIR__ . '/../..' . '/app/src/makePyramid.php',
+        'd1fa39c38454938a834d4dabc87b2c95' => __DIR__ . '/../..' . '/app/inputData.php',
+        '4cd81c7d26232f83c74906fac93bfe61' => __DIR__ . '/../..' . '/app/outputData.php',
     );
 
     public static $classMap = array (

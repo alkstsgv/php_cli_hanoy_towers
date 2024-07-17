@@ -114,8 +114,16 @@ function getModifiedPyramids(array $array): array
  */
 function choosePyramids(array $inputArr, string $firstPyr, string $secondPyr): array
 {
-    $firstPyr = (int)($firstPyr);
-    $secondPyr = (int)($secondPyr);
+    $allowedValues = [1,2,3];
+    while (true) {
+    if (in_array($firstPyr, $allowedValues) || in_array($secondPyr, $allowedValues)) {
+    $firstPyr = (int)($firstPyr) - 1;
+    $secondPyr = (int)($secondPyr) - 1;
+    break;
+    } else {
+        break;
+    }
+}
     $outputArr = [];
 
     foreach ($inputArr as $key => [$item]) {

@@ -1,8 +1,5 @@
 <?php
-
 declare(strict_types=1);
-
-
 
 define('ASCIITAB', array(
     0 => "/",
@@ -12,14 +9,15 @@ define('ASCIITAB', array(
     4 => ")",
     5 => " ",
     6 => "|"
-));
+)
+);
 
 /*
  * Создаёт пирамиду без дисков
  */
 function createOriginalPyramid(string $countOfBlocks): array
 {
-    $countOfBlocks = (int)$countOfBlocks;
+    $countOfBlocks = (int) $countOfBlocks;
     $pyramidWithDisks = [];
     for ($i = 0; $i <= $countOfBlocks; $i++) {
         $doubleIndex = $i;
@@ -31,7 +29,7 @@ function createOriginalPyramid(string $countOfBlocks): array
         if ($i < $countOfBlocks) {
             $pyramidWithDisks[] = str_pad(str_repeat((ASCIITAB[0] . str_repeat(ASCIITAB[2], $doubleIndex) . ASCIITAB[1]), 1), $doubleIndex, ASCIITAB[5], STR_PAD_LEFT);
         } else {
-            $pyramidWithDisks[] =  str_pad(str_repeat((ASCIITAB[0]  . str_repeat(ASCIITAB[2], $doubleIndex)  . ASCIITAB[1]), 1), $leftPadding, ASCIITAB[5], STR_PAD_LEFT);
+            $pyramidWithDisks[] = str_pad(str_repeat((ASCIITAB[0] . str_repeat(ASCIITAB[2], $doubleIndex) . ASCIITAB[1]), 1), $leftPadding, ASCIITAB[5], STR_PAD_LEFT);
         }
     }
 
@@ -45,15 +43,15 @@ function createOriginalPyramid(string $countOfBlocks): array
  */
 function createPyramidWithDisks(string $countOfDisks): array
 {
-    $countOfBlocks = (int)$countOfDisks;
+    $countOfBlocks = (int) $countOfDisks;
     $pyramidWithDisks = [];
     for ($i = 0; $i <= $countOfDisks; $i++) {
         $doubleIndex = $i;
         $doubleIndex += $i;
         if ($i === 0) {
-            $pyramidWithDisks[] =  str_pad(str_repeat((ASCIITAB[0]  . str_repeat(ASCIITAB[2], $doubleIndex)  . ASCIITAB[1]), 1), $doubleIndex, ASCIITAB[5], STR_PAD_LEFT);
+            $pyramidWithDisks[] = str_pad(str_repeat((ASCIITAB[0] . str_repeat(ASCIITAB[2], $doubleIndex) . ASCIITAB[1]), 1), $doubleIndex, ASCIITAB[5], STR_PAD_LEFT);
         } else {
-            $pyramidWithDisks[] =  str_pad(str_repeat((ASCIITAB[3] . ASCIITAB[2] . ASCIITAB[2] . ASCIITAB[0]  . str_repeat(ASCIITAB[2], $doubleIndex)  . ASCIITAB[1] . ASCIITAB[2] . ASCIITAB[2] . ASCIITAB[4]), 1), $doubleIndex, ASCIITAB[5], STR_PAD_LEFT);
+            $pyramidWithDisks[] = str_pad(str_repeat((ASCIITAB[3] . ASCIITAB[2] . ASCIITAB[2] . ASCIITAB[0] . str_repeat(ASCIITAB[2], $doubleIndex) . ASCIITAB[1] . ASCIITAB[2] . ASCIITAB[2] . ASCIITAB[4]), 1), $doubleIndex, ASCIITAB[5], STR_PAD_LEFT);
         }
     }
     return $pyramidWithDisks;
@@ -75,7 +73,6 @@ function createExamplesOfPyramid(array $pyrWithDisks, array $pyrWithoutDisks): a
         $firstPyramidWithDisks = str_pad($value, $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH);
         $secondPyramidWithoutDisks = str_pad($pyramidTwo[$key], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH);
         $thirdPyramidWithoutDisks = str_pad($pyramidThree[$key], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH) . PHP_EOL;
-        //        print_r($firstPyramidWithDisks . $secondPyramidWithoutDisks . $thirdPyramidWithoutDisks);
     }
 
     $arrOfPyr = [
@@ -97,15 +94,6 @@ function getInitArr(array $array): array
     return $array;
 }
 
-/*
- * Функция возвращает модифицированный массив
- */
-function getModifiedPyramids(array $array): array
-{
-    $modArray = $array;
-    return $array;
-}
-
 
 /*
  * Функция принимает массив массивов
@@ -114,16 +102,16 @@ function getModifiedPyramids(array $array): array
  */
 function choosePyramids(array $inputArr, string $firstPyr, string $secondPyr): array
 {
-    $allowedValues = [1,2,3];
+    $allowedValues = [1, 2, 3];
     while (true) {
-    if (in_array($firstPyr, $allowedValues) || in_array($secondPyr, $allowedValues)) {
-    $firstPyr = (int)($firstPyr) - 1;
-    $secondPyr = (int)($secondPyr) - 1;
-    break;
-    } else {
-        break;
+        if (in_array($firstPyr, $allowedValues) || in_array($secondPyr, $allowedValues)) {
+            $firstPyr = (int) ($firstPyr) - 1;
+            $secondPyr = (int) ($secondPyr) - 1;
+            break;
+        } else {
+            break;
+        }
     }
-}
     $outputArr = [];
 
     foreach ($inputArr as $key => [$item]) {
@@ -135,30 +123,6 @@ function choosePyramids(array $inputArr, string $firstPyr, string $secondPyr): a
     }
     return $outputArr;
 }
-
-
-
-/*
- * Функция меняет местами конкретные элементы в двух массивах через кучу
- */
-//function changeElements(array $arr, int $numOfElem): array
-//{
-//
-//    $middleArr = [];
-//    $outputArray = [];
-//
-//    foreach ($arr as [$item] ) {
-//        $middleArr[] = $item[$numOfElem];
-//    }
-////var_dump($middleArr);
-//    foreach ($arr as $key => [$value]) {
-//        $value[$numOfElem] = array_pop($middleArr);
-//        $outputArray[$key] = [$value];
-//    }
-////    var_dump($outputArray);
-//    return $outputArray;
-//
-//}
 
 /*
  * Функция сверяет элементы двух массивов, если они не равны, тогда идёт выше, пока не найдет элементы, которые равны.
@@ -195,16 +159,20 @@ function changeElements(array $arr): array
     return $outputArray;
 }
 
-
+/*
+ * Функция объединяет новый массив массивов из двух элементов
+ * с изначальным массивом массивов из трёх элементов по индексам
+ */
 function mergeArrays(array $initArr, array $modArr): array
 {
     $replacedArray = array_replace_recursive($initArr, $modArr);
-    //    print_r(array_replace_recursive($initArr, $modArr));
-    //    var_dump($replacedArray);
     return $replacedArray;
 }
 
 
+/*
+ * Функция выводит полученный массив в консоль
+ */
 function printPyramids(array $array): void
 {
     [$arr1, $arr2, $arr3] = $array;
@@ -219,17 +187,3 @@ function printPyramids(array $array): void
         }
     }
 }
-// $pyramidWithoutDisks = createOriginalPyramid(7);
-// $pyramidWithDisks = createPyramidWithDisks(7);
-// $initArrOfArrs = createExamplesOfPyramid($pyramidWithDisks, $pyramidWithoutDisks);
-// $initArr = getInitArr($initArrOfArrs);
-// $printArrays = printPyramids($initArr);
-
-
-// $chosenPyramids = choosePyramids($initArr, "0", "1");
-// $changedElemOfArr = changeElements($chosenPyramids);
-// $mergedArrays = mergeArrays($initArr, $changedElemOfArr);
-// $modArr = getModifiedPyramids($mergedArrays);
-// $printArrays = printPyramids($mergedArrays);
-
-

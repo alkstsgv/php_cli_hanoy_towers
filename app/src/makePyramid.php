@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -16,8 +17,9 @@ define('ASCIITAB', array(
 /*
  * Создаёт пирамиду без дисков
  */
-function createOriginalPyramid(int $countOfBlocks = 0): array
+function createOriginalPyramid(string $countOfBlocks): array
 {
+    $countOfBlocks = (int)$countOfBlocks;
     $pyramidWithDisks = [];
     for ($i = 0; $i <= $countOfBlocks; $i++) {
         $doubleIndex = $i;
@@ -25,11 +27,11 @@ function createOriginalPyramid(int $countOfBlocks = 0): array
         $i2 = 1;
         $i3 = $i2 + $i;
         $i2 += 1;
-        $leftPadding = $countOfBlocks+$i3;
+        $leftPadding = $countOfBlocks + $i3;
         if ($i < $countOfBlocks) {
             $pyramidWithDisks[] = str_pad(str_repeat((ASCIITAB[0] . str_repeat(ASCIITAB[2], $doubleIndex) . ASCIITAB[1]), 1), $doubleIndex, ASCIITAB[5], STR_PAD_LEFT);
         } else {
-            $pyramidWithDisks[] =  str_pad(str_repeat(( ASCIITAB[0]  . str_repeat(ASCIITAB[2], $doubleIndex)  . ASCIITAB[1]), 1), $leftPadding, ASCIITAB[5], STR_PAD_LEFT);
+            $pyramidWithDisks[] =  str_pad(str_repeat((ASCIITAB[0]  . str_repeat(ASCIITAB[2], $doubleIndex)  . ASCIITAB[1]), 1), $leftPadding, ASCIITAB[5], STR_PAD_LEFT);
         }
     }
 
@@ -41,8 +43,9 @@ function createOriginalPyramid(int $countOfBlocks = 0): array
  * Создаёт пирамиду с дисками
  * принимает int $countOfDisks = кол-ву дисков
  */
-function createPyramidWithDisks(int $countOfDisks = 0): array
+function createPyramidWithDisks(string $countOfDisks): array
 {
+    $countOfBlocks = (int)$countOfDisks;
     $pyramidWithDisks = [];
     for ($i = 0; $i <= $countOfDisks; $i++) {
         $doubleIndex = $i;
@@ -72,7 +75,7 @@ function createExamplesOfPyramid(array $pyrWithDisks, array $pyrWithoutDisks): a
         $firstPyramidWithDisks = str_pad($value, $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH);
         $secondPyramidWithoutDisks = str_pad($pyramidTwo[$key], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH);
         $thirdPyramidWithoutDisks = str_pad($pyramidThree[$key], $paddingBetweenPyramids, ASCIITAB[5], STR_PAD_BOTH) . PHP_EOL;
-//        print_r($firstPyramidWithDisks . $secondPyramidWithoutDisks . $thirdPyramidWithoutDisks);
+        //        print_r($firstPyramidWithDisks . $secondPyramidWithoutDisks . $thirdPyramidWithoutDisks);
     }
 
     $arrOfPyr = [
@@ -161,7 +164,7 @@ function changeElements(array $arr): array
     $test = [];
     $count = 0;
 
-    foreach ($arr as $key => [$item] ) {
+    foreach ($arr as $key => [$item]) {
         $count = count($item);
         for ($i = 0; $i < $count; $i++) {
             $test[] = $item[$i];
@@ -172,7 +175,7 @@ function changeElements(array $arr): array
         }
     }
 
-    foreach ($arr as [$item] ) {
+    foreach ($arr as [$item]) {
         $middleArr[] = $item[$numOfElem];
     }
 
@@ -188,8 +191,8 @@ function changeElements(array $arr): array
 function mergeArrays(array $initArr, array $modArr): array
 {
     $replacedArray = array_replace_recursive($initArr, $modArr);
-//    print_r(array_replace_recursive($initArr, $modArr));
-//    var_dump($replacedArray);
+    //    print_r(array_replace_recursive($initArr, $modArr));
+    //    var_dump($replacedArray);
     return $replacedArray;
 }
 
@@ -207,12 +210,11 @@ function printPyramids(array $array): void
             print_r($left . $middle . $right);
         }
     }
-
 }
-$pyramidWithoutDisks = createOriginalPyramid(7);
-$pyramidWithDisks = createPyramidWithDisks(7);
-$initArrOfArrs = createExamplesOfPyramid($pyramidWithDisks, $pyramidWithoutDisks);
-$initArr = getInitArr($initArrOfArrs);
+// $pyramidWithoutDisks = createOriginalPyramid(7);
+// $pyramidWithDisks = createPyramidWithDisks(7);
+// $initArrOfArrs = createExamplesOfPyramid($pyramidWithDisks, $pyramidWithoutDisks);
+// $initArr = getInitArr($initArrOfArrs);
 // $printArrays = printPyramids($initArr);
 
 
@@ -222,79 +224,4 @@ $initArr = getInitArr($initArrOfArrs);
 // $modArr = getModifiedPyramids($mergedArrays);
 // $printArrays = printPyramids($mergedArrays);
 
-// // $modArr1 = $modArr;
-// // var_dump($modArr1);
-// // var_dump($modArr === $modArr1);
-// $chosenPyramids = choosePyramids($mergedArrays, "0", "2");
-// $changedElemOfArr = changeElements($chosenPyramids);
-// $mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
-// $modArr = getModifiedPyramids($mergedArrays);
-// $printArrays = printPyramids($mergedArrays);
-
-// $printArrays = printPyramids($mergedArrays);
-// var_dump($modArr === $modArr1);
-// var_dump($modArr);
-
-// $chosenPyramids = choosePyramids($mergedArrays, "1", "2");
-// $changedElemOfArr = changeElements($chosenPyramids);
-// $mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
-// $printArrays = printPyramids($mergedArrays);
-
-// $chosenPyramids = choosePyramids($mergedArrays, "0", "1");
-// $changedElemOfArr = changeElements($chosenPyramids);
-// $mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
-// $printArrays = printPyramids($mergedArrays);
-
-
-
-
-// var_dump($modArr);
-
-$i = 0;
-while (true) {
-
-    if ($i === 0) {
-        $pyramidWithoutDisks = createOriginalPyramid(7);
-        $pyramidWithDisks = createPyramidWithDisks(7);
-        $initArrOfArrs = createExamplesOfPyramid($pyramidWithDisks, $pyramidWithoutDisks);
-        $initArr = getInitArr($initArrOfArrs);
-        $printArrays = printPyramids($initArr);
-
-        $firstPyr = readline("Выберите первую пирамиду: ") . PHP_EOL;
-        $secondPyr = readline("Выберите вторую пирамиду: ") . PHP_EOL;
-        print_r($firstPyr);
-        print_r($secondPyr);
-
-        $chosenPyramids = choosePyramids($initArr, $firstPyr, $secondPyr);
-        $changedElemOfArr = changeElements($chosenPyramids);
-        $mergedArrays = mergeArrays($initArr, $changedElemOfArr);
-        // echo "\e[2J";
-
-        $printArrays = printPyramids($mergedArrays);
-
-        $i++;
-
-    } else {
-        
-        $firstPyr = readline("Выберите первую пирамиду: ") . PHP_EOL;
-        $secondPyr = readline("Выберите вторую пирамиду: ") . PHP_EOL;
-        print_r($firstPyr);
-        print_r($secondPyr);
-
-        $chosenPyramids = choosePyramids($mergedArrays, $firstPyr, $secondPyr);
-        $changedElemOfArr = changeElements($chosenPyramids);
-        $mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
-        $modArr = getModifiedPyramids($mergedArrays);
-        // $printArrays = printPyramids($mergedArrays);
-        // echo "\e[8F";
-        // echo "\e[2J";
-        // echo "\e[8E";
-        // echo "\e[20T";
-        $printArrays = printPyramids($mergedArrays);
-
-    }
-   
-
-    
-} 
 

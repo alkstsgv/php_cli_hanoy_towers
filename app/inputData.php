@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 function anyKey()
 {
     echo "\e[31m";
@@ -9,10 +8,6 @@ function anyKey()
     $prompt = readline(); 
     // readline_callback_handler_install($prompt, function () {});
     // $keystroke = stream_get_contents(STDIN, 1);
-
-
-
-  
     echo <<<EOL
     \e[32m
     Здравствуйте,\e[31m $prompt!
@@ -25,12 +20,10 @@ function anyKey()
     EOL;
 
     // echo "\e[2J";
-    echo  <<<EOL
-    \n
-    Если вы готовы продолжить играть, то нажмите 'Y', иначе нажмите 'N:
-    EOL;
-
-    $prompt = readline();
+    
+    
+    
+    
     // echo "\e[31m";
     // readline_callback_handler_install($prompt, function($prompt) { $prompt = "y" ? "Вы нажали 'Да'" : "Вы нажали 'Нет'" });
     // $keystroke = stream_get_contents(STDIN, 1);
@@ -39,3 +32,4 @@ function anyKey()
 }
 
 $anyKey = anyKey();
+

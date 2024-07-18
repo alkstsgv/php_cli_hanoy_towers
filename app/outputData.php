@@ -4,22 +4,17 @@ declare(strict_types=1);
 $i = 0;
 while (true) {
     if ($i === 0) {
+        $anwser = ["y", "n"];
+        
         echo <<<EOL
         \n
         Если вы готовы продолжить играть, то введите 'Y', иначе 'N':
         EOL;
-
-        $anwser = ["y", "n"];
-        $anwserToContinue = readline();
-        $anwserToContinue = strtolower($anwserToContinue);
+        
+        $anwserToContinue = strtolower(readline());
         if (in_array($anwserToContinue, $anwser, true)) {
-
-            echo <<<EOL
-            Укажите какой высоты должны быть пирамиды: 
-            EOL;
-
-            $length = readline();
-
+            $length = trim(readline("Укажите какой высоты должны быть пирамиды:"));
+            
             echo <<<EOL
             \ec
             \e[10B
@@ -37,9 +32,11 @@ while (true) {
             EOL;
 
             $printArrays = printPyramids($initArr);
+        
             echo "\e[2B";
-            $firstPyr = readline("Выберите первую пирамиду: ") . PHP_EOL;
-            $secondPyr = readline("Выберите вторую пирамиду: ") . PHP_EOL;
+
+            $firstPyr = trim(readline("Выберите первую пирамиду: ")) . PHP_EOL;
+            $secondPyr = trim(readline("Выберите вторую пирамиду: ")) . PHP_EOL;
 
             echo <<<EOL
             \ec
@@ -47,7 +44,7 @@ while (true) {
             \e[38;5;128m
             EOL;
 
-            $chosenPyramids = choosePyramids($initArr, $firstPyr, $secondPyr);
+            $chosenPyramids = choosePyramids($initArr, (int)$firstPyr, (int)$secondPyr);
             $changedElemOfArr = changeElements($chosenPyramids);
             $mergedArrays = mergeArrays($initArr, $changedElemOfArr);
 
@@ -64,8 +61,8 @@ while (true) {
         }
     } else {
         echo "\e[2B";
-        $firstPyr = readline("Выберите первую пирамиду: ") . PHP_EOL;
-        $secondPyr = readline("Выберите вторую пирамиду: ") . PHP_EOL;
+        $firstPyr = trim(readline("Выберите первую пирамиду: ")) . PHP_EOL;
+        $secondPyr = trim(readline("Выберите вторую пирамиду: ")) . PHP_EOL;
 
         echo <<<EOL
         \ec
@@ -73,7 +70,7 @@ while (true) {
         \e[38;5;128m
         EOL;
 
-        $chosenPyramids = choosePyramids($mergedArrays, $firstPyr, $secondPyr);
+        $chosenPyramids = choosePyramids($mergedArrays, (int)$firstPyr, (int)$secondPyr);
         $changedElemOfArr = changeElements($chosenPyramids);
         $mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
 

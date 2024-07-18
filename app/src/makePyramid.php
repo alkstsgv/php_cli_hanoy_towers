@@ -15,21 +15,17 @@ define('ASCIITAB', array(
 /*
  * Создаёт пирамиду без дисков
  */
-function createOriginalPyramid(string $countOfBlocks): array
+function createOriginalPyramid(int $countOfBlocks): array
 {
     $countOfBlocks = (int) $countOfBlocks;
     $pyramidWithDisks = [];
     for ($i = 0; $i <= $countOfBlocks; $i++) {
         $doubleIndex = $i;
         $doubleIndex += $i;
-        $i2 = 1;
-        $i3 = $i2 + $i;
-        $i2 += 1;
-        $leftPadding = $countOfBlocks + $i3;
         if ($i < $countOfBlocks) {
             $pyramidWithDisks[] = str_pad(str_repeat((ASCIITAB[0] . str_repeat(ASCIITAB[2], $doubleIndex) . ASCIITAB[1]), 1), $doubleIndex, ASCIITAB[5], STR_PAD_LEFT);
         } else {
-            $pyramidWithDisks[] = str_pad(str_repeat((ASCIITAB[0] . str_repeat(ASCIITAB[2], $doubleIndex) . ASCIITAB[1]), 1), $leftPadding, ASCIITAB[5], STR_PAD_LEFT);
+            $pyramidWithDisks[] = str_pad(str_repeat((ASCIITAB[0] . str_repeat(ASCIITAB[2], $doubleIndex) . ASCIITAB[1]), 1), $doubleIndex, ASCIITAB[5], STR_PAD_LEFT);
         }
     }
 
@@ -41,13 +37,12 @@ function createOriginalPyramid(string $countOfBlocks): array
  * Создаёт пирамиду с дисками
  * принимает int $countOfDisks = кол-ву дисков
  */
-function createPyramidWithDisks(string $countOfDisks): array
+function createPyramidWithDisks(int $countOfDisks): array
 {
     $countOfBlocks = (int) $countOfDisks;
     $pyramidWithDisks = [];
     for ($i = 0; $i <= $countOfDisks; $i++) {
-        $doubleIndex = $i;
-        $doubleIndex += $i;
+        $doubleIndex = $i * 2;
         if ($i === 0) {
             $pyramidWithDisks[] = str_pad(str_repeat((ASCIITAB[0] . str_repeat(ASCIITAB[2], $doubleIndex) . ASCIITAB[1]), 1), $doubleIndex, ASCIITAB[5], STR_PAD_LEFT);
         } else {

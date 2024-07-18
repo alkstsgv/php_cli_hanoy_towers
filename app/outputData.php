@@ -9,11 +9,10 @@ while (true) {
         Если вы готовы продолжить играть, то введите 'Y', иначе 'N':
         EOL;
 
-        $anwserYes = ["Y", "y"];
-        $anwserNo = ["N", "n"];
+        $anwser = ["y", "n"];
         $anwserToContinue = readline();
-
-        if (in_array($anwserToContinue, $anwserYes)) {
+        $anwserToContinue = strtolower($anwserToContinue);
+        if (in_array($anwserToContinue, $anwser, true)) {
 
             echo <<<EOL
             Укажите какой высоты должны быть пирамиды: 
@@ -27,8 +26,8 @@ while (true) {
             \e[38;5;128m
             EOL;
 
-            $pyramidWithoutDisks = createOriginalPyramid($length);
-            $pyramidWithDisks = createPyramidWithDisks($length);
+            $pyramidWithoutDisks = createOriginalPyramid((int)$length);
+            $pyramidWithDisks = createPyramidWithDisks((int)$length);
             $initArrOfArrs = createExamplesOfPyramid($pyramidWithDisks, $pyramidWithoutDisks);
             $initArr = getInitArr($initArrOfArrs);
 
@@ -60,7 +59,7 @@ while (true) {
 
             $printArrays = printPyramids($mergedArrays);
             $i++;
-        } elseif (in_array($anwserToContinue, $anwserNo)) {
+        } elseif (in_array($anwserToContinue, $anwser)) {
             break;
         }
     } else {

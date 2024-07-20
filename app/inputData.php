@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-function anyKey(): void
+function greetingUser(): void
 {
     echo <<<EOL
     \ec \e[31m
@@ -26,5 +26,4 @@ function anyKey(): void
     EOL;
 }
 
-anyKey();
-
+$greetingUser = greetingUser();

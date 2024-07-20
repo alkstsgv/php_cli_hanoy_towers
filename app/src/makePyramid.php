@@ -100,16 +100,6 @@ function createExamplesOfPyramid(array $pyrWithDisks, array $pyrWithoutDisks): a
     return $arrOfPyr;
 }
 
-
-/*
- * Функция возвращает изначально созданный массив
- */
-function getInitArr(array $array): array
-{
-    return $array;
-}
-
-
 /*
  * Функция принимает массив массивов
  * находит по индексам массивов заданные 
@@ -120,13 +110,11 @@ function choosePyramids(array $inputArr, int $firstPyr, int $secondPyr): array
     $allowedValues = [1, 2, 3];
     $outputArr = [];
     while (true) {
-        if ((in_array($firstPyr, $allowedValues)) || (in_array($secondPyr, $allowedValues))) {
+        if ((in_array($firstPyr, $allowedValues, true)) || (in_array($secondPyr, $allowedValues, true))) {
             $firstPyr = (int)$firstPyr - 1;
             $secondPyr = (int)$secondPyr - 1;
             break;
-        } else {
-            break;
-        }
+        } 
     }
 
     foreach ($inputArr as $key => [$item]) {
@@ -159,8 +147,7 @@ function changeElements(array $arr): array
                 $middleArr = [];
                 break;
             }
-        }
-        
+        }  
     }
 
     foreach ($arr as [$item]) {
@@ -171,7 +158,6 @@ function changeElements(array $arr): array
         $value[$numOfElem] = array_pop($middleArr);
         $outputArray[$key] = [$value];
     }
-
     return $outputArray;
 }
 
@@ -202,8 +188,25 @@ function printPyramids(array $array): void
     }
 }
 
-// $length = 5;
-// $pyramidWithoutDisks = createOriginalPyramid((int)$length);
-//             $pyramidWithDisks = createPyramidWithDisks((int)$length);
-//             $initArrOfArrs = createExamplesOfPyramid($pyramidWithDisks, $pyramidWithoutDisks);
-//             $initArr = getInitArr($initArrOfArrs);
+
+/*
+* Функция для печати изначальных пирамид в консоли
+*/
+function create(int $length): array
+{
+    $pyramidWithoutDisks = createOriginalPyramid((int)$length);
+    $pyramidWithDisks = createPyramidWithDisks((int)$length);
+    $initArrOfArrs = createExamplesOfPyramid($pyramidWithDisks, $pyramidWithoutDisks);
+    return $initArrOfArrs;
+}
+
+/*
+* Функция для печати изменённых пирамид в консоли
+*/
+function merge(array $array, int $firstPyr, int $secondPyr): array
+{
+    $chosenPyramids = choosePyramids($array, (int)$firstPyr, (int)$secondPyr);
+    $changedElemOfArr = changeElements($chosenPyramids);
+    $mergedArrays = mergeArrays($array, $changedElemOfArr);
+    return $mergedArrays;
+}

@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-
 function choosePyramidInConsole(): array
 {
     $choose = [
@@ -33,12 +32,12 @@ while (true) {
         $anwserToContinue = strtolower(readline());
         if (in_array($anwserToContinue, $anwser, true)) {
             $length = trim(readline("Укажите какой высоты должны быть пирамиды: "));
-            $initArrOfArrs = create((int)$length);
+            $initArrOfArrs = createPyramids((int)$length);
             redrawAndPrintInConsole($initArrOfArrs);
 
             echo "\e[2B";
             $chosePyramidInConsole = choosePyramidInConsole();
-            $mergedArrays = merge($initArrOfArrs, (int)$chosePyramidInConsole[0], (int)$chosePyramidInConsole[1]);
+            $mergedArrays = moveElement($initArrOfArrs, (int)$chosePyramidInConsole[0], (int)$chosePyramidInConsole[1]);
             redrawAndPrintInConsole($mergedArrays);
             $i++;
         } else {
@@ -47,7 +46,7 @@ while (true) {
     } else {
         echo "\e[2B";
         $chosePyramidInConsole = choosePyramidInConsole();
-        $mergedArrays = merge($mergedArrays, (int)$chosePyramidInConsole[0], (int)$chosePyramidInConsole[1]);
+        $mergedArrays = moveElement($mergedArrays, (int)$chosePyramidInConsole[0], (int)$chosePyramidInConsole[1]);
         redrawAndPrintInConsole($mergedArrays);
     }
 }

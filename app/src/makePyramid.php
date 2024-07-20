@@ -11,8 +11,8 @@ const VERTICAL_BAR = "|";
 const PADDING_BETWEEN_PYRAMIDS = 50;
 
 /*
- * Вспомогательная функция для генерирации строчку 
- * при создании пирамиды с диском или без дисков
+ * Вспомогательная функция для создания 
+ * символов для печати в строку в консоли
  */
 function createStringOfPyramid(string $flag, string $test, int $i): string
 {
@@ -109,6 +109,7 @@ function choosePyramids(array $inputArr, int $firstPyr, int $secondPyr): array
 {
     $allowedValues = [1, 2, 3];
     $outputArr = [];
+
     while (true) {
         if ((in_array($firstPyr, $allowedValues, true)) || (in_array($secondPyr, $allowedValues, true))) {
             $firstPyr = (int)$firstPyr - 1;
@@ -124,6 +125,7 @@ function choosePyramids(array $inputArr, int $firstPyr, int $secondPyr): array
             $outputArr[$key] = [$item];
         }
     }
+
     return $outputArr;
 }
 
@@ -158,6 +160,7 @@ function changeElements(array $arr): array
         $value[$numOfElem] = array_pop($middleArr);
         $outputArray[$key] = [$value];
     }
+    
     return $outputArray;
 }
 
@@ -165,9 +168,10 @@ function changeElements(array $arr): array
  * Функция объединяет новый массив массивов из двух элементов
  * с изначальным массивом массивов из трёх элементов по индексам
  */
-function mergeArrays(array $initArr, array $modArr): array
+function arrayReplace(array $initArr, array $modArr): array
 {
     $replacedArray = array_replace_recursive($initArr, $modArr);
+    
     return $replacedArray;
 }
 
@@ -192,21 +196,23 @@ function printPyramids(array $array): void
 /*
 * Функция для печати изначальных пирамид в консоли
 */
-function create(int $length): array
+function createPyramids(int $length): array
 {
     $pyramidWithoutDisks = createOriginalPyramid((int)$length);
     $pyramidWithDisks = createPyramidWithDisks((int)$length);
     $initArrOfArrs = createExamplesOfPyramid($pyramidWithDisks, $pyramidWithoutDisks);
+
     return $initArrOfArrs;
 }
 
 /*
 * Функция для печати изменённых пирамид в консоли
 */
-function merge(array $array, int $firstPyr, int $secondPyr): array
+function moveElement(array $array, int $firstPyr, int $secondPyr): array
 {
     $chosenPyramids = choosePyramids($array, (int)$firstPyr, (int)$secondPyr);
     $changedElemOfArr = changeElements($chosenPyramids);
-    $mergedArrays = mergeArrays($array, $changedElemOfArr);
+    $mergedArrays = arrayReplace($array, $changedElemOfArr);
+
     return $mergedArrays;
 }

@@ -5,5 +5,5 @@
 # Folders to not be commited #
 ##############################
 /vendor
-.idea/
-.vscode/
+/.idea
+/.vscode

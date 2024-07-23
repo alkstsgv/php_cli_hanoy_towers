@@ -14,7 +14,7 @@ const PADDING_BETWEEN_TOWERS = 50;
  * Вспомогательная функция для создания 
  * символов для печати в строку в консоли
  */
-function createStringOfPyramid(string $flag, string $test, int $i): string
+function createStringOfTower(string $flag, string $test, int $i): string
 {
     (int)$index = $i * 2;
     $flagsValues  = [
@@ -43,56 +43,56 @@ function createStringOfPyramid(string $flag, string $test, int $i): string
 /*
  * Создаёт пирамиду без дисков
  */
-function createOriginalPyramid(int $countOfBlocks): array
+function createOriginalTower(int $countOfBlocks): array
 {
     $countOfBlocks = (int)$countOfBlocks;
-    $pyramidWithoutDisks = [];
+    $towerWithoutDisks = [];
     for ($i = 0; $i <= $countOfBlocks; $i++) {
         if ($i <= $countOfBlocks) {
-            $pyramidWithoutDisks[] = createStringOfPyramid("createwithout", "", $i);
+            $towerWithoutDisks[] = createStringOfTower("createwithout", "", $i);
         } 
     }
-    return $pyramidWithoutDisks;
+    return $towerWithoutDisks;
 }
 
 /*
  * Создаёт пирамиду с дисками
  * принимает int $countOfDisks = кол-ву дисков
  */
-function createPyramidWithDisks(int $countOfDisks): array
+function createTowerWithDisks(int $countOfDisks): array
 {
     $countOfBlocks = (int)$countOfDisks;
-    $pyramidWithDisks = [];
+    $towerWithDisks = [];
     for ($i = 0; $i <= $countOfDisks; $i++) {
-        $stringOfPyramid = "";
+        $stringOfTower = "";
         if ($i === 0) {
-            $pyramidWithDisks[] = createStringOfPyramid("createwith", "", $i);
+            $towerWithDisks[] = createStringOfTower("createwith", "", $i);
         } else {
-            $pyramidWithDisks[] = createStringOfPyramid("createwith", "", $i);
+            $towerWithDisks[] = createStringOfTower("createwith", "", $i);
         }
     }
-    return $pyramidWithDisks;
+    return $towerWithDisks;
 }
 
 /*
  * Создаёт экземппляр пирамиды с дисками, 2 экземпляра пирамиды без дисков
  */
-function createExamplesOfPyramid(array $pyrWithDisks, array $pyrWithoutDisks): array
+function createExamplesOfTower(array $pyrWithDisks, array $pyrWithoutDisks): array
 {
-    $pyramidWithDisks = $pyrWithDisks;
-    $pyramidTwo = $pyrWithoutDisks;
-    $pyramidThree = $pyrWithoutDisks;
+    $towerWithDisks = $pyrWithDisks;
+    $towerTwo = $pyrWithoutDisks;
+    $towerThree = $pyrWithoutDisks;
 
-    foreach ($pyramidWithDisks as $key => $value) {
-        $firstPyramidWithDisks = str_pad($value, PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH);
-        $secondPyramidWithoutDisks = str_pad($pyramidTwo[$key], PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH);
-        $thirdPyramidWithoutDisks = str_pad($pyramidThree[$key], PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH) . PHP_EOL;
+    foreach ($towerWithDisks as $key => $value) {
+        $firstTowerWithDisks = str_pad($value, PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH);
+        $secondTowerWithoutDisks = str_pad($towerTwo[$key], PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH);
+        $thirdTowerWithoutDisks = str_pad($towerThree[$key], PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH) . PHP_EOL;
     }
 
     $arrOfPyr = [
-        [$pyramidWithDisks],
-        [$pyramidTwo],
-        [$pyramidThree]
+        [$towerWithDisks],
+        [$towerTwo],
+        [$towerThree]
     ];
 
     return $arrOfPyr;
@@ -194,9 +194,9 @@ function printTowers(array $array): void
 */
 function createTowers(int $length): array
 {
-    $pyramidWithoutDisks = createOriginalPyramid((int)$length);
-    $pyramidWithDisks = createPyramidWithDisks((int)$length);
-    $initArrOfArrs = createExamplesOfPyramid($pyramidWithDisks, $pyramidWithoutDisks);
+    $towerWithoutDisks = createOriginalTower((int)$length);
+    $towerWithDisks = createTowerWithDisks((int)$length);
+    $initArrOfArrs = createExamplesOfTower($towerWithDisks, $towerWithoutDisks);
 
     return $initArrOfArrs;
 }

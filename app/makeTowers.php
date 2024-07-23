@@ -8,7 +8,7 @@ const LEFT_PARENTHESIS = "(";
 const RIGHT_PARENTHESIS = ")";
 const WHITESPACE = " ";
 const VERTICAL_BAR = "|";
-const PADDING_BETWEEN_PYRAMIDS = 50;
+const PADDING_BETWEEN_TOWERS = 50;
 
 /*
  * Вспомогательная функция для создания 
@@ -74,8 +74,6 @@ function createPyramidWithDisks(int $countOfDisks): array
     return $pyramidWithDisks;
 }
 
-
-
 /*
  * Создаёт экземппляр пирамиды с дисками, 2 экземпляра пирамиды без дисков
  */
@@ -86,9 +84,9 @@ function createExamplesOfPyramid(array $pyrWithDisks, array $pyrWithoutDisks): a
     $pyramidThree = $pyrWithoutDisks;
 
     foreach ($pyramidWithDisks as $key => $value) {
-        $firstPyramidWithDisks = str_pad($value, PADDING_BETWEEN_PYRAMIDS, WHITESPACE, STR_PAD_BOTH);
-        $secondPyramidWithoutDisks = str_pad($pyramidTwo[$key], PADDING_BETWEEN_PYRAMIDS, WHITESPACE, STR_PAD_BOTH);
-        $thirdPyramidWithoutDisks = str_pad($pyramidThree[$key], PADDING_BETWEEN_PYRAMIDS, WHITESPACE, STR_PAD_BOTH) . PHP_EOL;
+        $firstPyramidWithDisks = str_pad($value, PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH);
+        $secondPyramidWithoutDisks = str_pad($pyramidTwo[$key], PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH);
+        $thirdPyramidWithoutDisks = str_pad($pyramidThree[$key], PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH) . PHP_EOL;
     }
 
     $arrOfPyr = [
@@ -105,7 +103,7 @@ function createExamplesOfPyramid(array $pyrWithDisks, array $pyrWithoutDisks): a
  * находит по индексам массивов заданные 
  * запаковывает их и отправляет
  */
-function choosePyramids(array $inputArr, int $firstPyr, int $secondPyr): array
+function chooseTowers(array $inputArr, int $firstPyr, int $secondPyr): array
 {
     $allowedValues = [1, 2, 3];
     $outputArr = [];
@@ -175,28 +173,26 @@ function arrayReplace(array $initArr, array $modArr): array
     return $replacedArray;
 }
 
-
 /*
  * Функция выводит полученный массив в консоль
  */
-function printPyramids(array $array): void
+function printTowers(array $array): void
 {
     [$arr1, $arr2, $arr3] = $array;
     foreach ($arr1 as $key => $arr) {
         foreach ($arr as $k => $value) {
-            $left = str_pad($value, PADDING_BETWEEN_PYRAMIDS, WHITESPACE, STR_PAD_BOTH);
-            $middle = str_pad($arr2[$key][$k], PADDING_BETWEEN_PYRAMIDS, WHITESPACE, STR_PAD_BOTH);
-            $right = str_pad($arr3[$key][$k], PADDING_BETWEEN_PYRAMIDS, WHITESPACE, STR_PAD_BOTH) . PHP_EOL;
+            $left = str_pad($value, PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH);
+            $middle = str_pad($arr2[$key][$k], PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH);
+            $right = str_pad($arr3[$key][$k], PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH) . PHP_EOL;
             print_r($left . $middle . $right);
         }
     }
 }
 
-
 /*
-* Функция для печати изначальных пирамид в консоли
+* Функция для создания трёх пирамид
 */
-function createPyramids(int $length): array
+function createTowers(int $length): array
 {
     $pyramidWithoutDisks = createOriginalPyramid((int)$length);
     $pyramidWithDisks = createPyramidWithDisks((int)$length);
@@ -206,12 +202,12 @@ function createPyramids(int $length): array
 }
 
 /*
-* Функция для печати изменённых пирамид в консоли
+* Функция для перемещения выбранного элемента с пирамиды A на пирамиду B
 */
 function moveElement(array $array, int $firstPyr, int $secondPyr): array
 {
-    $chosenPyramids = choosePyramids($array, (int)$firstPyr, (int)$secondPyr);
-    $changedElemOfArr = changeElements($chosenPyramids);
+    $chosenTowers = chooseTowers($array, (int)$firstPyr, (int)$secondPyr);
+    $changedElemOfArr = changeElements($chosenTowers);
     $mergedArrays = arrayReplace($array, $changedElemOfArr);
 
     return $mergedArrays;

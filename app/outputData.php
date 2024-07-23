@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+/* Функция для выбора пирамиды
+*
+*/
 function choosePyramidInConsole(): array
 {
     $choose = [
@@ -10,18 +13,20 @@ function choosePyramidInConsole(): array
     return $choose;
 }
 
-function redrawConsolePage(): void
+/* Функция для перерисовки страницы 
+* и её печати в консоли
+*/
+function redrawAndPrintInConsole(array $array): void
 {
-    echo <<<EOL
+    $redrawConsolePage = function() {
+        echo <<<EOL
         \ec
         \e[10B
         \e[38;5;128m
         EOL;
-}
-function redrawAndPrintInConsole(array $array): void
-{
-    $redrawConsolePage = redrawConsolePage();
-    $printArrays = printPyramids($array);
+    };
+    $redrawConsolePage();
+    $printArrays = printTowers($array);
 }
 
 $i = 0;
@@ -32,9 +37,8 @@ while (true) {
         $anwserToContinue = strtolower(readline());
         if (in_array($anwserToContinue, $anwser, true)) {
             $length = trim(readline("Укажите какой высоты должны быть пирамиды: "));
-            $initArrOfArrs = createPyramids((int)$length);
-            redrawAndPrintInConsole($initArrOfArrs);
-
+            $initArrOfArrs = createTowers((int)$length);
+            $redrawAndPrint = redrawAndPrintInConsole($initArrOfArrs);
             echo "\e[2B";
             $chosePyramidInConsole = choosePyramidInConsole();
             $mergedArrays = moveElement($initArrOfArrs, (int)$chosePyramidInConsole[0], (int)$chosePyramidInConsole[1]);

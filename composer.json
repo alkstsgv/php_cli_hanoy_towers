@@ -1,9 +1,10 @@
 {
   "autoload": {
     "files": [
-      "app/src/makePyramid.php",
+      "app/src/bin.php",
       "app/inputData.php",
-      "app/outputData.php"
+      "app/outputData.php",
+      "app/makeTowers.php"
     ]
   },
   "require": {

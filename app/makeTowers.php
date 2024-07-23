@@ -14,7 +14,7 @@ const PADDING_BETWEEN_TOWERS = 50;
  * Вспомогательная функция для создания 
  * символов для печати в строку в консоли
  */
-function createStringOfTower(string $flag, string $test, int $i): string
+function createStringOfTower(string $flag, int $i): string
 {
     (int)$index = $i * 2;
     $flagsValues  = [
@@ -49,7 +49,7 @@ function createOriginalTower(int $countOfBlocks): array
     $towerWithoutDisks = [];
     for ($i = 0; $i <= $countOfBlocks; $i++) {
         if ($i <= $countOfBlocks) {
-            $towerWithoutDisks[] = createStringOfTower("createwithout", "", $i);
+            $towerWithoutDisks[] = createStringOfTower("createwithout", $i);
         } 
     }
     return $towerWithoutDisks;
@@ -66,9 +66,9 @@ function createTowerWithDisks(int $countOfDisks): array
     for ($i = 0; $i <= $countOfDisks; $i++) {
         $stringOfTower = "";
         if ($i === 0) {
-            $towerWithDisks[] = createStringOfTower("createwith", "", $i);
+            $towerWithDisks[] = createStringOfTower("createwith", $i);
         } else {
-            $towerWithDisks[] = createStringOfTower("createwith", "", $i);
+            $towerWithDisks[] = createStringOfTower("createwith", $i);
         }
     }
     return $towerWithDisks;

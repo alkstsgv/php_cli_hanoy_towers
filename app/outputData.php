@@ -1,89 +1,56 @@
 <?php
 declare(strict_types=1);
 
+/* Функция для выбора пирамиды
+*
+*/
+function choosePyramidInConsole(): array
+{
+    $choose = [
+        $firstPyr = trim(readline("Выберите первую пирамиду: ")) . PHP_EOL,
+        $secondPyr = trim(readline("Выберите вторую пирамиду: ")) . PHP_EOL
+    ];
+    return $choose;
+}
+
+/* Функция для перерисовки страницы 
+* и её печати в консоли
+*/
+function redrawAndPrintInConsole(array $array): void
+{
+    $redrawConsolePage = function() {
+        echo <<<EOL
+        \ec
+        \e[10B
+        \e[38;5;128m
+        EOL;
+    };
+    $redrawConsolePage();
+    $printArrays = printTowers($array);
+}
+
 $i = 0;
 while (true) {
     if ($i === 0) {
-        echo <<<EOL
-        \n
-        Если вы готовы продолжить играть, то введите 'Y', иначе 'N':
-        EOL;
-
-        $anwserYes = ["Y", "y"];
-        $anwserNo = ["N", "n"];
-        $anwserToContinue = readline();
-
-        if (in_array($anwserToContinue, $anwserYes)) {
-
-            echo <<<EOL
-            Укажите какой высоты должны быть пирамиды: 
-            EOL;
-
-            $length = readline();
-
-            echo <<<EOL
-            \ec
-            \e[10B
-            \e[38;5;128m
-            EOL;
-
-            $pyramidWithoutDisks = createOriginalPyramid($length);
-            $pyramidWithDisks = createPyramidWithDisks($length);
-            $initArrOfArrs = createExamplesOfPyramid($pyramidWithDisks, $pyramidWithoutDisks);
-            $initArr = getInitArr($initArrOfArrs);
-
-            echo <<<EOL
-            \ec \e[10B
-            \e[38;5;128m
-            EOL;
-
-            $printArrays = printPyramids($initArr);
+        $anwser = ["y"];
+        echo PHP_EOL . "Если вы готовы продолжить играть, то введите 'Y', иначе 'N': ";
+        $anwserToContinue = strtolower(readline());
+        if (in_array($anwserToContinue, $anwser, true)) {
+            $length = trim(readline("Укажите какой высоты должны быть пирамиды: "));
+            $initArrOfArrs = createTowers((int)$length);
+            $redrawAndPrint = redrawAndPrintInConsole($initArrOfArrs);
             echo "\e[2B";
-            $firstPyr = readline("Выберите первую пирамиду: ") . PHP_EOL;
-            $secondPyr = readline("Выберите вторую пирамиду: ") . PHP_EOL;
-
-            echo <<<EOL
-            \ec
-            \e[10B
-            \e[38;5;128m
-            EOL;
-
-            $chosenPyramids = choosePyramids($initArr, $firstPyr, $secondPyr);
-            $changedElemOfArr = changeElements($chosenPyramids);
-            $mergedArrays = mergeArrays($initArr, $changedElemOfArr);
-
-            echo <<<EOL
-            \ec
-            \e[10B
-            \e[38;5;128m
-            EOL;
-
-            $printArrays = printPyramids($mergedArrays);
+            $chosePyramidInConsole = choosePyramidInConsole();
+            $mergedArrays = moveElement($initArrOfArrs, (int)$chosePyramidInConsole[0], (int)$chosePyramidInConsole[1]);
+            redrawAndPrintInConsole($mergedArrays);
             $i++;
-        } elseif (in_array($anwserToContinue, $anwserNo)) {
+        } else {
             break;
         }
     } else {
         echo "\e[2B";
-        $firstPyr = readline("Выберите первую пирамиду: ") . PHP_EOL;
-        $secondPyr = readline("Выберите вторую пирамиду: ") . PHP_EOL;
-
-        echo <<<EOL
-        \ec
-        \e[10B
-        \e[38;5;128m
-        EOL;
-
-        $chosenPyramids = choosePyramids($mergedArrays, $firstPyr, $secondPyr);
-        $changedElemOfArr = changeElements($chosenPyramids);
-        $mergedArrays = mergeArrays($mergedArrays, $changedElemOfArr);
-
-        echo <<<EOL
-        \ec
-        \e[10B
-        \e[38;5;128m
-        EOL;
-
-        $printArrays = printPyramids($mergedArrays);
+        $chosePyramidInConsole = choosePyramidInConsole();
+        $mergedArrays = moveElement($mergedArrays, (int)$chosePyramidInConsole[0], (int)$chosePyramidInConsole[1]);
+        redrawAndPrintInConsole($mergedArrays);
     }
 }

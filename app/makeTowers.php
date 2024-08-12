@@ -11,7 +11,7 @@ const VERTICAL_BAR = "|";
 const PADDING_BETWEEN_TOWERS = 50;
 
 /*
- * Вспомогательная функция для создания 
+ * Вспомогательная функция для создания
  * символов для печати в строку в консоли
  */
 function createStringOfTower(string $flag, int $i): string
@@ -24,7 +24,6 @@ function createStringOfTower(string $flag, int $i): string
     $flag = strtolower(trim($flag));
     $stringWithoutDisks = str_pad(str_repeat(SLASH . str_repeat(UNDERLINING, $index) . BACKSLASH, 1), $index, WHITESPACE, STR_PAD_LEFT);
     $stringWithDisks = str_pad(str_repeat(LEFT_PARENTHESIS . str_repeat(UNDERLINING, 2) . SLASH . str_repeat(UNDERLINING, $index) .BACKSLASH . str_repeat(UNDERLINING, 2) .RIGHT_PARENTHESIS, 1), $index, WHITESPACE, STR_PAD_LEFT);
-    
     if ($flag === "createwithout") {
         return $stringWithoutDisks;
     }
@@ -33,11 +32,10 @@ function createStringOfTower(string $flag, int $i): string
         if ($i === 0) {
             return $stringWithoutDisks;
         } else {
-            return $stringWithDisks; 
+            return $stringWithDisks;
         }
     }
     return $stringWithDisks;
-
 }
 
 /*
@@ -50,7 +48,7 @@ function createOriginalTower(int $countOfBlocks): array
     for ($i = 0; $i <= $countOfBlocks; $i++) {
         if ($i <= $countOfBlocks) {
             $towerWithoutDisks[] = createStringOfTower("createwithout", $i);
-        } 
+        }
     }
     return $towerWithoutDisks;
 }
@@ -100,7 +98,7 @@ function createExamplesOfTower(array $pyrWithDisks, array $pyrWithoutDisks): arr
 
 /*
  * Функция принимает массив массивов
- * находит по индексам массивов заданные 
+ * находит по индексам массивов заданные
  * запаковывает их и отправляет
  */
 function chooseTowers(array $inputArr, int $firstPyr, int $secondPyr): array
@@ -113,7 +111,7 @@ function chooseTowers(array $inputArr, int $firstPyr, int $secondPyr): array
             $firstPyr = (int)$firstPyr - 1;
             $secondPyr = (int)$secondPyr - 1;
             break;
-        } 
+        }
     }
 
     foreach ($inputArr as $key => [$item]) {
@@ -147,7 +145,7 @@ function changeElements(array $arr): array
                 $middleArr = [];
                 break;
             }
-        }  
+        }
     }
 
     foreach ($arr as [$item]) {
@@ -158,7 +156,6 @@ function changeElements(array $arr): array
         $value[$numOfElem] = array_pop($middleArr);
         $outputArray[$key] = [$value];
     }
-    
     return $outputArray;
 }
 
@@ -169,7 +166,6 @@ function changeElements(array $arr): array
 function arrayReplace(array $initArr, array $modArr): array
 {
     $replacedArray = array_replace_recursive($initArr, $modArr);
-    
     return $replacedArray;
 }
 

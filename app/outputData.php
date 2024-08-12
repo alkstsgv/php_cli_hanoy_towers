@@ -13,12 +13,12 @@ function choosePyramidInConsole(): array
     return $choose;
 }
 
-/* Функция для перерисовки страницы 
+/* Функция для перерисовки страницы
 * и её печати в консоли
 */
 function redrawAndPrintInConsole(array $array): void
 {
-    $redrawConsolePage = function() {
+    $redrawConsolePage = function () {
         echo <<<EOL
         \ec
         \e[10B

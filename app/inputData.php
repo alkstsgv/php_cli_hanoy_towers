@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
-function greetingUser(): void
-{
+
     echo <<<EOL
     \ec \e[31m
     Здравствуйте! Пожалуйста, введите своё имя: \n
@@ -24,6 +23,3 @@ function greetingUser(): void
     2. Вы можете перемещать диски с помощью ввода номера башни с клавиатуры, используя цифры \e[31m 1, 2, 3.
     \e[32m
     EOL;
-}
-
-$greetingUser = greetingUser();

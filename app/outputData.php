@@ -14,18 +14,21 @@ function choosePyramidInConsole(): array
 }
 
 /* Функция для перерисовки страницы
-* и её печати в консоли
+*/
+function redrawConsolePage(): void
+{
+    echo <<<EOL
+    \ec
+    \e[10B
+    \e[38;5;128m
+    EOL;
+}
+
+/* Функция для печати страницы в консоли
 */
 function redrawAndPrintInConsole(array $array): void
 {
-    $redrawConsolePage = function () {
-        echo <<<EOL
-        \ec
-        \e[10B
-        \e[38;5;128m
-        EOL;
-    };
-    $redrawConsolePage();
+    $redrawConsolePage = redrawConsolePage();
     $printArrays = printTowers($array);
 }
 

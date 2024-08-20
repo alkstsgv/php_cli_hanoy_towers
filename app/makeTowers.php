@@ -90,10 +90,9 @@ function createExamplesOfTower(array $pyrWithDisks, array $pyrWithoutDisks): arr
     $towerThree = $pyrWithoutDisks;
 
     foreach ($towerWithDisks as $key => $value) {
-        $firstTowerWithDisks = str_pad(
-            $value, PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH);
-        $thirdTowerWithoutDisks = str_pad(
-            $towerThree[$key], PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH) . PHP_EOL;
+        $firstTowerWithDisks = str_pad($value, PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH);
+        $thirdTowerWithoutDisks = str_pad($towerThree[$key], PADDING_BETWEEN_TOWERS, WHITESPACE, STR_PAD_BOTH) .
+        PHP_EOL;
     }
 
     $arrOfPyr = [

@@ -4,7 +4,8 @@
       "app/src/bin.php",
       "app/inputData.php",
       "app/outputData.php",
-      "app/makeTowers.php"
+      "app/makeTowers.php",
+      "app/printPyramid.php"
     ]
   },
   "require": {

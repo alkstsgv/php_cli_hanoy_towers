@@ -22,10 +22,16 @@ function createStringOfTower(string $flag, int $i): string
         "createwith"
     ];
     $flag = strtolower(trim($flag));
-    $stringWithoutDisks = str_pad(str_repeat(
-        SLASH . str_repeat(UNDERLINING, $index) . BACKSLASH, 1), $index, WHITESPACE, STR_PAD_LEFT);
-    $stringWithDisks = str_pad(str_repeat(
-        LEFT_PARENTHESIS . str_repeat(UNDERLINING, 2) . SLASH . str_repeat(UNDERLINING, $index) .BACKSLASH . str_repeat(UNDERLINING, 2) .RIGHT_PARENTHESIS, 1), $index, WHITESPACE, STR_PAD_LEFT);
+    $stringWithoutDisks = str_pad(str_repeat(SLASH .
+        str_repeat(UNDERLINING, $index) .
+        BACKSLASH, 1), $index, WHITESPACE, STR_PAD_LEFT);
+    $stringWithDisks = str_pad(str_repeat(LEFT_PARENTHESIS .
+        str_repeat(UNDERLINING, 2) .
+        SLASH .
+        str_repeat(UNDERLINING, $index) .
+        BACKSLASH .
+        str_repeat(UNDERLINING, 2) .
+        RIGHT_PARENTHESIS, 1), $index, WHITESPACE, STR_PAD_LEFT);
     if ($flag === "createwithout") {
         return $stringWithoutDisks;
     }
